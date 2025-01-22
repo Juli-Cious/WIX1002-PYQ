@@ -1,0 +1,26 @@
+doi,title,subject,author 1,author 2,author 3,author 4,author 5,author 6,author 7,author 8,keyword,status
+10.1234/abc123,Exploring AI Ethics,AI,Alice,Bob,Carol,Dave,Eve,Frank,Grace,Heidi,ethics/AI,active
+10.5678/xyz456,Quantum Computing Advances,Quantum Computing,Ivy,Jack,Karl,Laura,Mallory,Nina,Oscar,Peggy,quantum/ computing,deleted
+10.9101/def789,Climate Change Impacts,Environment,Quincy,Rita,Sam,Tina,Uma,Victor,Wendy,Xander,climate/ impact,active
+10.1122/ghi012,Genomics Revolution,Biology,Yvonne,Zane,Aiden,Bianca,Cathy,Derek,Erica,Fiona,genomics/ biology,deleted
+10.3141/jkl345,Blockchain Security,Cryptography,George,Hannah,Ivan,Judy,Kevin,Liam,Mia,Nora,blockchain/ security,active
+10.1111/abc234,AI in Healthcare,Healthcare,Oliver,Sophia,Liam,Emma,Ava,Noah,Charlotte,Mason,healthcare/ AI,active
+10.2222/xyz567,Renewable Energy Technologies,Energy,Logan,Ella,Lucas,Mila,Harper,Henry,Amelia,Ethan,renewable/ energy,deleted
+10.3333/def890,Cybersecurity Threats,Security,Elijah,Aria,James,Isabella,Benjamin,Emily,Michael,Elizabeth,cybersecurity/threats,active
+10.4444/ghi123,Space Exploration,Astronomy,Matthew,Avery,Jackson,Scarlett,Sebastian,Lily,Aiden,Chloe,space/ exploration,active
+10.5555/jkl456,Advancements in Robotics,Robotics,Daniel,Sofia,Carter,Victoria,Wyatt,Zoe,Gabriel,Layla,robotics/ advancements,deleted
+10.6666/mno789,Mental Health Awareness,Psychology,Julian,Audrey,Adam,Lila,Nathan,Ivy,Leo,Elena,mental health/ psychology,active
+10.7777/pqr012,Big Data Analytics,Data Science,Isaac,Bella,Anthony,Aurora,Eli,Stella,Andrew,Ellie,big data/ analytics,deleted
+10.8888/stu345,Sustainable Architecture,Architecture,Christopher,Hazel,Jaxon,Violet,Dominic,Eleanor,Ezra,Paisley,sustainable/ architecture,active
+10.9999/vwx678,Nanotechnology Applications,Nanotechnology,Owen,Luna,Joseph,Grace,Alexander,Nora,Ethan,Zoey,nanotechnology/ applications,deleted
+10.1010/yza901,Cultural Heritage Preservation,Culture,Caleb,Willow,Aaron,Penelope,Connor,Madeline,Isaiah,Nova,cultural/ heritage,active
+10.2020/bcd234,AI in Education,Education,Lucas,Hannah,Nathan,Sophie,Evelyn,Jacob,Leah,Samuel,AI/ education,active
+10.3030/efg567,Biotechnology Innovations,Biotechnology,David,Lillian,Isaac,Ruby,Nicolas,Clara,Asher,Sienna,biotechnology/ innovations,deleted
+10.4040/hij890,Ethics in Technology,Ethics,Jonathan,Maya,Adrian,Isla,Ezekiel,Anna,Jordan,Eden,ethics/ technology,active
+10.5050/klm123,Machine Learning Trends,AI,Levi,Natalie,Hudson,Samantha,Easton,Alice,Thomas,Genevieve,machine learning/ trends,active
+10.6060/nop456,Ocean Conservation,Environment,Grayson,Julia,Cooper,Gabriella,Harrison,Vera,Miles,Faith,ocean/ conservation,deleted
+10.7070/qrs789,Neural Network Applications,AI,Parker,Molly,Elliot,Jasmine,Beau,Aurora,Greyson,Melody,neural networks/ applications,active
+10.8080/tuv012,Virtual Reality and Society,Technology,Weston,Rosalie,Chase,Skylar,Ryder,Adeline,Kai,Naomi,virtual reality/ society,deleted
+10.9090/wxy345,Cryptocurrency Security,Finance,Roman,Harley,Archer,Margaret,Declan,Cecilia,Gavin,Athena,cryptocurrency/ security,active
+10.1011/zab678,Gene Editing Technologies,Biology,Evan,Daisy,Brody,Evangeline,Sawyer,Ada,Zachary,Vivian,gene editing/ technologies,active
+10.1112/cde901,Renewable Energy Policies,Environment,Silas,Isabel,Colton,Mabel,Ryker,Lydia,Finn,Freya,renewable/ policies,deleted

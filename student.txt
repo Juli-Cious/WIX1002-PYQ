@@ -1,0 +1,10 @@
+Alice Johnson, 85
+Bob Smith, -1
+Charlie Brown, 92
+David Wilson, 76
+Eve Taylor, -1
+Frank Thomas, 88
+Grace Lee, 95
+Hannah Harris, 73
+Ian White, -1
+Jack Martin, 81
