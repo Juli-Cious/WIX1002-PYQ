@@ -12,108 +12,115 @@ import java.io.*;
  */
 public class Q5 {
     public static void main(String[] args) {
+        File participantstxt = new File("participants.txt");
+        String[][] vals = readParticipants(participantstxt);
         
-        String[][] participants_info = new String[4][4];
-        try{
-            Scanner sc = new Scanner(new FileInputStream("participants.txt"));
-            int i = 0;
-            while(sc.hasNextLine()) {
-                String[] line = sc.nextLine().split(",");
-                participants_info[i] = line;
-                i++;
+        for (String[] val : vals) {
+            for (String string : val) {
+                System.out.print(string + " ");
             }
+            System.out.println("");
+        }
+        
+        for (String[] val : vals) {
+            val[3] = normalizeAddress(val[3]);
+        }
+        
+        for (String[] val : vals) {
+            for (String string : val) {
+                System.out.print(string + " ");
+            }
+            System.out.println("");
+        }
+        
+        boolean inPairs = checkPair(vals);
+        if(inPairs) {
+            assignSeats(vals);
+        }
+    }
+    
+    public static String[][] readParticipants(File file) {
+        String[][] values = new String[4][4];
+        
+        try {
+            Scanner sc = new Scanner(new FileInputStream(file));
             
+            for (int i = 0; i < values.length; i++) {
+                String line = sc.nextLine();
+                String[] line_split = line.split(",");
+                values[i][0] = line_split[0];
+                values[i][1] = line_split[1];
+                values[i][2] = line_split[2];
+                values[i][3] = line_split[3];
+            }
         } catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
-        } catch(IOException e) {
-            System.out.println(e.getMessage());
         }
+        return values;
+    }
+    
+    public static String normalizeAddress(String s) {
+        
+//        s.toUpperCase(); //change all to uppercase
+//        s.replaceAll(" ", ""); //remove all white spaces
+        return s.toUpperCase().replaceAll(" ", "");
+    }
+    
+    public static boolean checkPair(String[][] values) {
+        boolean[] paired = {false, false, false, false};
         
         for (int i = 0; i < 4; i++) {
-            String name = participants_info[i][0];
-            String gender = participants_info[i][1];
-            String age = participants_info[i][2];
-            String address = participants_info[i][3];
-            
-            System.out.printf("%-12s%-4s%-4s%s\n", name, gender, age, address);
-        }
-        
-        participants_info = conversion(participants_info);
-        
-        boolean[] found = {false, false, false, false};
-        for (int i = 0; i < 4; i++) {
+            if(paired[i]) continue;
             for (int j = i + 1; j < 4; j++) {
-                if(found[i] && found[j]) {
-                    continue;
-                }
-
-                if(participants_info[i][3].equals(participants_info[j][3])) {
-                    found[i] = true;
-                    found[j] = true;
-                }
-            }
-        }
-        
-        boolean inPair = true;
-        for (int i = 0; i < 4; i++) {
-            if(found[i]){
-                continue;
-            }
-            else{
-                inPair = false;
-                break;
-            }
-        }
-        
-        System.out.println("");
-        if(inPair) {
-            System.out.println("Participants are in pairs. ");
-        }
-        else {
-            System.out.println("Participants are not in pairs, cannot proceed.");
-        }
-        
-        seatArrange(participants_info);
-    }
-    
-    public static String[][] conversion(String[][] info) {
-        for (int i = 0; i < 4; i++) {
-            info[i][3] = info[i][3].replaceAll(" ", "").toUpperCase();
-        }
-        return info;
-    }
-    
-    public static void seatArrange(String[][] info) {
-        try {
-            PrintWriter pw = new PrintWriter("grouping.txt");
-            String index = "0123";
-            String[] seats = {"Seat A", "Seat B", "Seat C", "Seat D"};
-            int i = 0;
-            int prev = 0;
-            pw.write(seats[i] + " : " + info[0][0] + ", " + info[0][2] + "years old\n");
-            index = index.replaceFirst("0", "");
-            i++;
-            while(index.length() != 0) {
-                for (int j = 1; j < index.length() + 1; j++) {
-                    if(index.length() == 1) {
-                        pw.write(seats[i] + " : " + info[Character.getNumericValue(index.charAt(0))][0] + ", " + info[Character.getNumericValue(index.charAt(0))][2] + "years old");
-                        index = index.replaceFirst(index, "");
-                    }
-                    if(info[j][3].equals(info[prev][3])) {
-                        continue;
-                    }
-                    else {
-                        pw.write(seats[i] + " : " + info[j][0] + ", " + info[j][2] + "years old\n");
-                        i++;
-                        prev = j;
-                        index = index.replaceFirst(Integer.toString(j), "");
+                if(paired[i]) continue;
+                if(values[i][3].equals(values[j][3])) {
+                    if(!values[i][1].equals(values[j][1])) {
+                        paired[i] = true;
+                        paired[j] = true;
                         break;
                     }
                 }
             }
-            pw.close();
-        } catch(IOException e) {
-            System.out.println(e.getMessage());
         }
+        
+        for (boolean b : paired) {
+            if(b == false) {
+                System.out.println("Participants are not in pairs, cannot proceed.");
+                return false;
+            }
+        }
+        System.out.println("Participants are in pairs. ");
+        return true;
+    }
+    
+    public static void assignSeats(String[][] values) {
+        String[] pairs = new String[4];
+        
+        pairs[0] = values[0][0] +", " + values[0][2] + " years old";
+        String last_address = values[0][3];
+        
+        int i = 1;
+        int index = 1;
+        boolean[] foundSeat = {true, false, false, false};
+        while(true) {
+            if(i == 4) {
+                i = 0;
+            }
+            if(index == 4) {
+                break;
+            }
+            if(!last_address.equals(values[i][3]) && !foundSeat[i]) {
+                pairs[index] = values[i][0] +", " + values[i][2] + " years old";
+                index++;
+                last_address = values[i][3];
+                foundSeat[i] = true;
+            }
+            i++;
+        }
+        
+        System.out.println("Seat A: " + pairs[0]);
+        System.out.println("Seat B: " + pairs[1]);
+        System.out.println("Seat C: " + pairs[2]);
+        System.out.println("Seat D: " + pairs[3]);
     }
 }
