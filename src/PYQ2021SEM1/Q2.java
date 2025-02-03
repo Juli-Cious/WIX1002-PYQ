@@ -21,129 +21,52 @@ public class Q2 {
         findSolution(arr);
         
     }
-    
+    //two possibilities: (x op y ) op z / x op (y op z)
     public static void findSolution(int[] arr) {
         int x = arr[0];
         int y = arr[1];
         int z = arr[2];
         
+        
         char[] operators = {'+', '-', '*', '/'};
-        
-        boolean found = false;
-        for (char operator : operators) {
-            
-            int result = 0;
-            int result_another = 0;
-            int result_double_divide = 0;
-            String result_string = "";
-            String result_another_string = "";
-            String result_double_divide_string = "";
-            
-            switch(operator) {
-                case '+':
-                    result = x + y;
-                    break;
-                case '-':
-                    result = x - y;
-                    break;
-                case '*':
-                    result = x * y;
-                    break;
-                case '/':
-                    result = x / y;
-                    break;
-            }
-            for (char p : operators) {
-                switch(p) {
-                    case '+':
-                        result = result + z;
-                        result_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                        if(operator == '*' || operator == '/') {
-                            switch(operator) {
-                                case '*':
-                                    result_another = x * (y + z);
-                                    result_another_string = x + " " + operator + " (" + y + " " + p + " " + z + ") = 18";
-                                    break;
-                                case '/':
-                                    result_another = x / (y + z);
-                                    result_another_string = x + " " + operator + " (" + y + " " + p + " " + z + ") = 18";
-                                    break;
-                            }
-                        }
-                        break;
-                    case '-':
-                        result = result - z;
-                        result_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                        if(operator == '*' || operator == '/') {
-                            switch(operator) {
-                                case '*':
-                                    result_another = x * (y - z);
-                                    result_another_string = x + " " + operator + " (" + y + " " + p + " " + z + ") = 18";
-                                    break;
-                                case '/':
-                                    result_another = x / (y - z);
-                                    result_another_string = x + " " + operator + " (" + y + " " + p + " " + z + ") = 18";
-                                    break;
-                            }
-                        }
-                        break;
-                    case '*':
-                        result = result * z;
-                        result_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                        if(operator == '+' || operator == '-') {
-                            result_string = "(" + x + " " + operator + " " + y + ") " + p + " " + z + " = 18";
-                            switch(operator) {
-                                case '+':
-                                    result_another = x + y * z;
-                                    result_another_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                                    break;
-                                case '-':
-                                    result_another = x - y * z;
-                                    result_another_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                                    break;
-                            }
-                        }
-                        break;
-                    case '/':
-                        result = result / z;
-                        result_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                        if(operator == '+' || operator == '-') {
-                            result_string = "(" + x + " " + operator + " " + y + ") " + p + " " + z + " = 18";
-                            switch(operator) {
-                                case '+':
-                                    result_another = x + y / z;
-                                    result_another_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                                    break;
-                                case '-':
-                                    result_another = x - y / z;
-                                    result_another_string = x + " " + operator + " " + y + " " + p + " " + z + " = 18";
-                                    break;
-                            }
-                        }
-                        if(operator == '/') {
-                            
-                            result_double_divide = (int)(x / (y / (double) z ));
-                        }
-                        break;
+        for (char op1 : operators) {
+            for (char op2 : operators) {
+                int result1 = (int) evaluate((evaluate(x, y, op1)), z, op2);
+                int result2 = (int) evaluate(x, evaluate(y, z, op2), op1);
+                
+                if(result1 == 18 && result2 == 18) {
+                    System.out.printf("%d %c %d %c %d = 18\n", x, op1, y, op2, z);
                 }
-
-                if(result == 18) {
-                    System.out.println(result_string);
-                    found = true;
+                else {
+                    if(result1 == 18) {
+                        if(op1 == '*' || op1 == '/' && op2 == '-' || op2 == '+') {
+                            System.out.printf("%d %c %d %c %d = 18\n", x, op1, y, op2, z);
+                        }
+                        else {
+                            System.out.printf("(%d %c %d) %c %d = 18\n", x, op1, y, op2, z);
+                        }
+                        
+                    }
+                    if(result2 == 18) {
+                        if(op1 == '+' || op1 == '-' && op2 == '/' || op2 == '*') {
+                            System.out.printf("%d %c %d %c %d = 18\n", x, op1, y, op2, z);
+                        }
+                        else {
+                            System.out.printf("%d %c (%d %c %d) = 18\n", x, op1, y, op2, z);
+                        }
+                    }
                 }
-                if(result_another == 18) {
-                    System.out.println(result_another_string);
-                    found = true;
-                }
-                if(result_double_divide == 18) {
-                    System.out.println(x + " " + operator + " (" + y + " " + p + " " + z + ") = 18");
-                    found = true;
-                } 
             }
         }
-        
-        if(!found) {
-            System.out.println("No solution found.");
+    }
+    
+    public static double evaluate(double a, double b, char op) {
+        switch(op) {
+            case '+': return a + b;
+            case '-': return a - b;
+            case '*': return a * b;
+            case '/': return a / b;
         }
+        return -1;
     }
 }
