@@ -24,10 +24,11 @@ public class Q2 {
         printMatrix(matrix_b);
         
         System.out.println("Matrix A + B: ");
-        printMatrix(addMatrix(matrix_a, matrix_b));
+        printMatrix(addMatrix(matrix_a.clone(), matrix_b.clone()));
+        
         
         System.out.println("Matrix A x B: ");
-        printMatrix(multMatrix(matrix_a, matrix_b));
+        printMatrix(multMatrix(matrix_a.clone(), matrix_b.clone()));
     }
     
     public static int[][] generateMatrix(int N) {
@@ -52,22 +53,31 @@ public class Q2 {
     }
     
     public static int[][] addMatrix(int[][] A, int[][] B) {
+        int[][] ans = new int[A.length][B.length];
+        
         for (int i = 0; i < A.length; i++) {
             for (int j = 0; j < A[i].length; j++) {
-                A[i][j] += B[i][j];
+                ans[i][j] = A[i][j] + B[i][j];
             }
         }
         
-        return A;
+        return ans;
     }
     
     public static int[][] multMatrix(int[][] A, int[][] B) {
-        for (int i = 0; i < A.length; i++) {
-            for (int j = 0; j < A[i].length; j++) {
-                A[i][j] *= B[i][j];
+        int[][] ans = new int[A.length][B.length];
+        
+        int row = 0;
+        int column = 0;
+        
+        for (int i = 0; i < ans.length; i++) {
+            for (int j = 0; j < ans[i].length; j++) {
+                for (int k = 0; k < A.length; k++) { //multiply two array elements
+                    ans[i][j] += A[i][k] * B[k][j];
+                }
             }
         }
         
-        return A;
+        return ans;
     }
 }
